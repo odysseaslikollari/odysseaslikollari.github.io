@@ -1,8 +1,11 @@
 #include <stdio.h>
 
-long long prime(long long numb) {
+long long prime(long long numb) {          //Χρήση long long ώστε η συνάρτηση να δέχεται ακέραιους αριθμούς εως 10.000.000.000 
     int divisor , isprime=1 ;
-    for (divisor=2 ; divisor<numb ; divisor++) {
+    if (numb==0 || numb==1) {             
+        isprime=0 ;
+    } 
+    for (divisor=2 ; divisor<=numb/2 ; divisor++) {  //διαιρώντας το numb με 2 μειώνεται ο χρόνος εκτέλεσης της συνάρτησης
         if (numb%divisor==0) {
             isprime=0 ;
         }
@@ -15,7 +18,7 @@ long long prime(long long numb) {
 
 
 
-long long goldbach(long long numb) {
+long long goldbach(long long numb) {   //Χρήση long long ώστε η συνάρτηση να δέχεται ακέραιους αριθμούς εως 10.000.000.000                                                                                      
     long long  p , q ;
     int f=0 ;
          while (1) {
@@ -23,7 +26,7 @@ long long goldbach(long long numb) {
                 if (prime(p)!=0) {
                     q=numb-p ;
                      if (prime(q)!=0) {
-                        printf("%lld=%lld+%lld\n", numb , p , q )  ;
+                        printf("%lld=%lld+%lld\n", numb , p , q )  ; //Χρήση lld εφόσον οι μεταβλήτες δηλώνονται με long long
                         f=1 ;
                         break ;
                      }              
@@ -36,7 +39,7 @@ long long goldbach(long long numb) {
                 }           
                 
                 }  
-                if (f==1) {
+                if (f==1) {     //Συνθήκη για την αποφυγή ατέρμονης επανάληψης
                     break ;
                 }      
             }
@@ -51,7 +54,7 @@ long long goldbach(long long numb) {
 
 
 
-    int main(void) { 
+    int main(void) {     //Tο void αναγκάστηκα να το βάλω εξαιτίας της δοσμένης εντολής 'gcc -O0 -m32 -Wall -Wextra -Werror -pedantic -o goldbach goldbach.c'
 
      long long num = 0 ;
      long long x , pr ;
@@ -68,20 +71,20 @@ long long goldbach(long long numb) {
         printf(" EOF detected, exiting\n") ;
         return 0 ;
     }    
-    else if (num != (long long) num) {
+    else if (num != (long long) num) {       //Χρησιμοποίησα την συγκεκριμένη εξίσωση για να εξασφαλίσω ότι το num δεν είναι δεκαδικός
          printf(" Invalid input: expected an integer\n") ; 
         return 1 ;
     }
     else {
             printf("Give me a letter. p or g\n") ;
-            scanf(" %c", &letter) ;
+            scanf(" %c", &letter) ;   // "%c" διότι η μεταβλητή letter είναι χαρακτήρας
                 if (letter=='p') {
                      pr=prime(num) ;
                      if (pr!=0) {
-                    printf("%lld is prime\n" , num) ;
+                    printf("%lld is prime\n" , num) ;      //Χρησιμοποίησα lld εφόσον οι μεταβλήτες δηλώνονται με long long                                                                     
                      }
                      else {
-                        printf("%lld is not prime\n" , num) ;
+                        printf("%lld is not prime\n" , num) ;   //Χρησιμοποίησα lld εφόσον οι μεταβλήτες δηλώνονται με long long                                                                     
                      }     
                 }
                 else if (letter=='g') {
