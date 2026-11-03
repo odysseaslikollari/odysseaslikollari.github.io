@@ -1,13 +1,14 @@
 #include <stdio.h>
 
 long long prime(long long numb) {          //Χρήση long long ώστε η συνάρτηση να δέχεται ακέραιους αριθμούς εως 10.000.000.000 
-    int divisor , isprime=1 ;
+    long long divisor , isprime=1 ;         // Xρήση long long ώστε το πρόγραμμα να εκτελείται πιο γρήγορα
     if (numb==0 || numb==1) {             
         isprime=0 ;
     } 
-    for (divisor=2 ; divisor<=numb/2 ; divisor++) {  //διαιρώντας το numb με 2 μειώνεται ο χρόνος εκτέλεσης της συνάρτησης
+    for (divisor=2 ; divisor*divisor<=numb ; divisor++) {
         if (numb%divisor==0) {
             isprime=0 ;
+            break ;
         }
     }
     return isprime ;
@@ -28,7 +29,7 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
                      if (prime(q)!=0) {
                         printf("%lld=%lld+%lld\n", numb , p , q )  ; //Χρήση lld εφόσον οι μεταβλήτες δηλώνονται με long long
                         f=1 ;
-                        break ;
+                        return 1;
                      }              
                     else {
                         continue ;
@@ -57,7 +58,7 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
     int main(void) {     //Tο void αναγκάστηκα να το βάλω εξαιτίας της δοσμένης εντολής 'gcc -O0 -m32 -Wall -Wextra -Werror -pedantic -o goldbach goldbach.c'
 
      long long num = 0 ;
-     long long x , pr ;
+     long long x , y , pr ;
      char letter ;
      while (1) {
      printf("Give me a number\n") ;
@@ -77,7 +78,12 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
     }
     else {
             printf("Give me a letter. p or g\n") ;
-            scanf(" %c", &letter) ;   // "%c" διότι η μεταβλητή letter είναι χαρακτήρας
+            y=scanf(" %c", &letter) ;   // "%c" διότι η μεταβλητή letter είναι χαρακτήρας
+            if (y==EOF) {
+                printf("EOF detected,exiting\n") ;
+                return 0 ;
+            }
+                
                 if (letter=='p') {
                      pr=prime(num) ;
                      if (pr!=0) {
@@ -88,7 +94,7 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
                      }     
                 }
                 else if (letter=='g') {
-                     if (num % 2 == 0 && num>=2) {
+                     if (num % 2 == 0 && num>2) { // Έλεγχος αν ο αριθμός ειναι άρτιος και μεγαλύτερος του 2
                         goldbach(num) ;   
                      }
                     else {
@@ -102,7 +108,9 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
 
                 }   
         }
+          continue ;  
         }     
+        return 0 ;  
      }       
     
     
