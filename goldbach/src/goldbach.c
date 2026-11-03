@@ -21,31 +21,26 @@ long long prime(long long numb) {          //Χρήση long long ώστε η σ
 
 long long goldbach(long long numb) {   //Χρήση long long ώστε η συνάρτηση να δέχεται ακέραιους αριθμούς εως 10.000.000.000                                                                                      
     long long  p , q ;
-    int f=0 ;
          while (1) {
             for(p=2 ; p<=numb/2 ; p++) {
                 if (prime(p)!=0) {
                     q=numb-p ;
                      if (prime(q)!=0) {
                         printf("%lld=%lld+%lld\n", numb , p , q )  ; //Χρήση lld εφόσον οι μεταβλήτες δηλώνονται με long long
-                        f=1 ;
                         return 1;
                      }              
                     else {
                         continue ;
                     }    
-                    }   
+                }       
                 else {
                     continue ;    
                 }           
                 
                 }  
-                if (f==1) {     //Συνθήκη για την αποφυγή ατέρμονης επανάληψης
-                    break ;
                 }      
-            }
-    return 1 ;    
-}       
+    return 0 ;    
+}  
     
 
 
@@ -61,22 +56,21 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
      long long x , y , pr ;
      char letter ;
      while (1) {
-     printf("Give me a number\n") ;
-
-     x = scanf("%lld", &num ) ;
-     if (num < 0 || num>10000000000) { 
-        printf(" Number should be in the range [0,10000000000]\n") ;
+        printf("Give me a number\n") ;
+         x = scanf("%lld", &num ) ;
+         if (num < 0 || num>10000000000) { 
+            printf(" Number should be in the range [0,10000000000]\n") ;
                 return 1 ;
-     }   
-    else if (x==EOF) {
-        printf(" EOF detected, exiting\n") ;
-        return 0 ;
-    }    
-    else if (num != (long long) num) {       //Χρησιμοποίησα την συγκεκριμένη εξίσωση για να εξασφαλίσω ότι το num δεν είναι δεκαδικός
-         printf(" Invalid input: expected an integer\n") ; 
-        return 1 ;
-    }
-    else {
+         }   
+         else if (x==EOF) {
+            printf(" EOF detected, exiting\n") ;
+            return 0 ;
+        }    
+        else if (num != (long long) num) {       //Χρησιμοποίησα την συγκεκριμένη εξίσωση για να εξασφαλίσω ότι το num δεν είναι δεκαδικός
+                 printf(" Invalid input: expected an integer\n") ; 
+                return 1 ;
+        }
+        else {
             printf("Give me a letter. p or g\n") ;
             y=scanf(" %c", &letter) ;   // "%c" διότι η μεταβλητή letter είναι χαρακτήρας
             if (y==EOF) {
@@ -87,15 +81,16 @@ long long goldbach(long long numb) {   //Χρήση long long ώστε η συν
                 if (letter=='p') {
                      pr=prime(num) ;
                      if (pr!=0) {
-                    printf("%lld is prime\n" , num) ;      //Χρησιμοποίησα lld εφόσον οι μεταβλήτες δηλώνονται με long long                                                                     
+                    printf("%lld is prime\n" , num) ;      //Χρησιμοποίησα lld εφόσον η μεταβλήτη num δηλώνεται με long long                                                                     
                      }
                      else {
-                        printf("%lld is not prime\n" , num) ;   //Χρησιμοποίησα lld εφόσον οι μεταβλήτες δηλώνονται με long long                                                                     
+                        printf("%lld is not prime\n" , num) ;                                                                       
                      }     
                 }
                 else if (letter=='g') {
                      if (num % 2 == 0 && num>2) { // Έλεγχος αν ο αριθμός ειναι άρτιος και μεγαλύτερος του 2
-                        goldbach(num) ;   
+                        goldbach(num) ; 
+                        continue ;  
                      }
                     else {
                         printf(" Goldbach's conjecture is applicable only to even numbers greater than 2!\n") ;
