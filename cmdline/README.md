@@ -1,4 +1,4 @@
-# odysseaslikollari0.github.io
+# odysseaslikollari.github.io
 byte0: Με ls εμφάνισα τα περιεχόμενα των φακέλων και με cd τους άνοιξα και συνδυάζοντας τις δυο αυτές εντολές βρήκα τελικά το string
 
 byte1: Με την εντολή man εμφάνισα το περιεχομενο του προγράμματος και βρήκα το string
